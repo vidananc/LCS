@@ -5,7 +5,7 @@ public class LCS
     private StringBuilder result;
     private int[][] dp;
     private int[][] m;
-    public String getLCS(String x, String y)
+    public int getLCS(String x, String y)
     {
         result = new StringBuilder();
         dp = new int[x.length() + 1][y.length() + 1];
@@ -39,9 +39,9 @@ public class LCS
                 }
             }
         }
-        System.out.println(dp[x.length()][y.length()]);
         lcs(x, x.length() - 1, y.length() - 1);
-        return result.toString();
+        System.out.println(result);
+        return dp[x.length()][y.length()];
     }
     private void lcs(String x, int i, int j)
     {
@@ -62,5 +62,13 @@ public class LCS
                 lcs(x, i, j - 1);
                 break;
         }
+    }
+    public int lastAdded(String s)
+    {
+        StringBuilder temp = new StringBuilder(s);
+        temp.reverse();
+        String y = temp.toString();
+        int length = getLCS(s, y);
+        return s.length() - length;
     }
 }
